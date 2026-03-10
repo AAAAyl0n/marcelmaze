@@ -1,0 +1,21 @@
+{
+  "staticBasePath": "/firmware",
+  "cdnBaseUrl": "",
+  "firmwares": [
+    {
+      "env": "eous",
+      "version": "1.0.0",
+      "manifestPath": "eous/1.0.0/manifest.json"
+    },
+    {
+      "env": "amillion",
+      "version": "1.0.0",
+      "manifestPath": "amillion/1.0.0/manifest.json"
+    },
+    {
+      "env": "paperboo",
+      "version": "1.0.0",
+      "manifestPath": "paperboo/1.0.0/manifest.json"
+    }
+  ]
+}

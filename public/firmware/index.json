@@ -1,0 +1,11 @@
+{
+  "staticBasePath": "/firmware",
+  "cdnBaseUrl": "",
+  "firmwares": [
+    {
+      "env": "eous",
+      "version": "1.0.0",
+      "manifestPath": "eous/1.0.0/manifest.json"
+    }
+  ]
+}

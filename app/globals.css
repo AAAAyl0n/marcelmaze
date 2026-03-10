@@ -1,0 +1,535 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,wght@0,400;0,600;0,800;1,800&display=swap');
+
+:root {
+  --bg-color: #0d0d0d;
+  --surface: #1a1a1a;
+  --surface-hover: #2a2a2a;
+  --fg-main: #f0f0f0;
+  --fg-muted: #808080;
+  --accent: #E2FF00; /* ZZZ Neon Yellow/Green */
+  --accent-hover: #ebff4a;
+  --danger: #FF2B45; /* ZZZ Red */
+  --border: #333333;
+  --font-sans: "Inter", "Power Grotesk", -apple-system, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--fg-main);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  /* ZZZ Dot Matrix Background */
+  background-image: radial-gradient(var(--border) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: center center;
+}
+
+::selection {
+  background: var(--accent);
+  color: #000;
+}
+
+.route-fade {
+  animation: routeFade 220ms ease-in-out;
+}
+
+@keyframes routeFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.container-center {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* ZZZ Style Card */
+.brutalist-card {
+  width: 100%;
+  max-width: 640px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  position: relative;
+  z-index: 10;
+  border-top: 4px solid var(--accent);
+  box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 0.5);
+}
+
+.brutalist-card::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  right: -10px;
+  width: 0;
+  height: 0;
+  border-bottom: 10px solid var(--accent);
+  border-right: 10px solid transparent;
+}
+
+.header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: #000;
+  border-bottom: 1px solid var(--border);
+}
+
+.header-title {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-style: italic;
+  font-size: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0;
+  text-shadow: 2px 2px 0px rgba(226, 255, 0, 0.3);
+}
+
+.header-status {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(226, 255, 0, 0.1);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent);
+  animation: blink 1.5s steps(2, start) infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.card-content {
+  padding: 32px 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, var(--surface) 0%, #111 100%);
+}
+
+.section-label {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-style: italic;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: var(--fg-main);
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-label::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 14px;
+  background: var(--accent);
+  transform: skew(-15deg);
+}
+
+.grid-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.te-option {
+  background: #0d0d0d;
+  border: 1px solid var(--border);
+  padding: 20px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  text-align: center;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+}
+
+.te-option::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  background: var(--border);
+  transition: background 0.2s ease;
+}
+
+.te-option:hover {
+  background: var(--surface-hover);
+}
+
+.te-option.selected {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.te-option.selected::after {
+  background: #000;
+}
+
+.te-option.selected .option-label,
+.te-option.selected .option-id {
+  color: #000;
+}
+
+.te-option input[type="radio"] {
+  display: none;
+}
+
+.option-id {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: bold;
+  color: var(--fg-muted);
+  margin-bottom: 8px;
+}
+
+.option-label {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-style: italic;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--fg-main);
+}
+
+.te-input {
+  width: 100%;
+  appearance: none;
+  background: #0d0d0d;
+  border: 1px solid var(--border);
+  color: var(--accent);
+  padding: 16px;
+  font-family: var(--font-mono);
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 0;
+  transition: border-color 0.2s;
+  margin-bottom: 32px;
+}
+
+.te-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.te-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.flex-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  align-items: stretch;
+}
+
+.te-button-outline {
+  background: transparent;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  padding: 0;
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-style: italic;
+  font-size: 16px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 1px;
+  width: 200px;
+  flex-shrink: 0;
+}
+
+.te-button-outline span {
+  display: inline-block;
+}
+
+.te-button-outline:hover:not(:disabled) {
+  background: var(--accent);
+  color: #000;
+}
+
+.te-button-outline:disabled {
+  border-color: var(--border);
+  color: var(--fg-muted);
+  cursor: not-allowed;
+}
+
+.te-checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  margin-bottom: 40px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--fg-muted);
+}
+
+.te-checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border);
+  background: #000;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.te-checkbox:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.te-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  width: 5px;
+  height: 10px;
+  border: solid #000;
+  border-width: 0 2px 2px 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.te-button-primary {
+  width: 100%;
+  background: var(--accent);
+  color: #000;
+  border: none;
+  padding: 20px 24px;
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-style: italic;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+.te-button-primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+  transform: scale(1.02);
+}
+
+.te-button-primary:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.te-button-primary:disabled {
+  background: var(--border);
+  color: var(--fg-muted);
+  cursor: not-allowed;
+}
+
+/* Sync Page Styles */
+.terminal-display {
+  background: #000;
+  border: 1px solid var(--border);
+  padding: 24px;
+  margin-bottom: 24px;
+  font-family: var(--font-mono);
+  min-height: 160px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.terminal-display::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  background-size: 100% 4px, 3px 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 24px;
+  position: relative;
+  z-index: 10;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-label {
+  font-size: 10px;
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.info-value {
+  font-size: 14px;
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.terminal-log {
+  flex: 1;
+  color: var(--fg-muted);
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-y: auto;
+  position: relative;
+  z-index: 10;
+}
+
+.terminal-log .active-log {
+  color: #fff;
+  text-shadow: 0 0 5px #fff;
+}
+
+.progress-container {
+  margin-top: auto;
+  padding-top: 16px;
+  position: relative;
+  z-index: 10;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 8px;
+  color: var(--fg-main);
+  font-weight: bold;
+}
+
+.te-progress-bar {
+  height: 20px;
+  background: #111;
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  transform: skew(-15deg);
+}
+
+.te-progress-fill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.1s linear;
+  position: relative;
+}
+
+/* Hazard stripes for progress bar */
+.te-progress-fill::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background-image: linear-gradient(
+    -45deg, 
+    rgba(0, 0, 0, 0.4) 25%, 
+    transparent 25%, 
+    transparent 50%, 
+    rgba(0, 0, 0, 0.4) 50%, 
+    rgba(0, 0, 0, 0.4) 75%, 
+    transparent 75%, 
+    transparent
+  );
+  background-size: 20px 20px;
+  animation: moveStripes 1s linear infinite;
+}
+
+.te-progress-fill.paused::after {
+  animation: none;
+}
+
+@keyframes moveStripes {
+  0% { background-position: 0 0; }
+  100% { background-position: 20px 20px; }
+}
+
+.result-message {
+  margin-top: 16px;
+  padding: 16px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.result-message.success {
+  color: #000;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.result-message.error {
+  color: #fff;
+  background: var(--danger);
+  box-shadow: 0 0 10px var(--danger);
+}

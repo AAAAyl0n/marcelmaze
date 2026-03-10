@@ -1,0 +1,17 @@
+{
+  "name": "Bangboo amillion",
+  "version": "1.0.0",
+  "env": "amillion",
+  "chip": "esp32s3",
+  "flash_size": "16MB",
+  "baud": 921600,
+  "flash_mode": "dio",
+  "flash_freq": "80m",
+  "erase_flash": false,
+  "files": [
+    { "offset": "0x0000",   "path": "bootloader.bin" },
+    { "offset": "0x8000",   "path": "partitions.bin" },
+    { "offset": "0x10000",  "path": "firmware.bin" },
+    { "offset": "0x310000", "path": "littlefs.bin", "fs": "littlefs" }
+  ]
+}
