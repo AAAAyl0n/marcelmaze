@@ -188,16 +188,20 @@ function SyncPageInner() {
             </div>
           )}
 
-          {!result && (
-            <button
-              className="te-button-primary"
-              onClick={start}
-              disabled={isFlashing || !manifestUrl || webSerialBlocked}
-            >
-              <span>{isFlashing ? "SYNC IN PROGRESS..." : "START COMMISSION"}</span>
-              <span>{isFlashing ? "///" : ">>"}</span>
-            </button>
-          )}
+          <button
+            className="te-button-primary"
+            onClick={start}
+            disabled={isFlashing || !manifestUrl || webSerialBlocked}
+          >
+            <span>
+              {isFlashing
+                ? "SYNC IN PROGRESS..."
+                : result?.success
+                  ? "COMMISSION COMPLETE"
+                  : "START COMMISSION"}
+            </span>
+            <span>{isFlashing ? "///" : ">>"}</span>
+          </button>
         </div>
       </div>
     </div>
